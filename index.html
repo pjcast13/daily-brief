@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tuesday, Feb 17 — Daily Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAF8F5;
+  --bg2: #F3F0EB;
+  --card: #FFFFFF;
+  --card-border: #E8E4DE;
+  --text: #2C2825;
+  --text2: #6B6560;
+  --text3: #9E9891;
+  --accent: #B8533E;
+  --accent-light: #FEF3F0;
+  --accent2: #D4924B;
+  --green: #4A7C59;
+  --green-light: #F0F7F2;
+  --highlight: #FFF8E1;
+  --highlight-border: #F0DFA0;
+  --shadow: 0 1px 3px rgba(44,40,37,0.06);
+  --shadow-lg: 0 4px 16px rgba(44,40,37,0.08);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --serif: 'Newsreader', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+  --mono: 'DM Mono', 'SF Mono', monospace;
+  --progress: 0%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1A1816;
+    --bg2: #242120;
+    --card: #2A2725;
+    --card-border: #3D3935;
+    --text: #E8E4DE;
+    --text2: #A09A94;
+    --text3: #6B6560;
+    --accent: #D4724A;
+    --accent-light: #2E2220;
+    --accent2: #D4924B;
+    --green: #6AAF7B;
+    --green-light: #1E2A20;
+    --highlight: #2A2618;
+    --highlight-border: #4A4430;
+    --shadow: 0 1px 3px rgba(0,0,0,0.2);
+    --shadow-lg: 0 4px 16px rgba(0,0,0,0.3);
+  }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.6;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  min-height: 100dvh;
+}
+
+/* Progress bar */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--bg2);
+  z-index: 100;
+}
+.progress-bar .fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  width: var(--progress);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0 2px 2px 0;
+}
+
+.container {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 20px 16px 80px;
+}
+
+/* Header */
+.header {
+  padding: 24px 0 20px;
+  animation: fadeUp 0.6s ease;
+}
+.header .day-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.header h1 {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.header .context {
+  font-size: 0.82rem;
+  color: var(--text2);
+  margin-bottom: 16px;
+}
+.header .win-condition {
+  background: var(--highlight);
+  border: 1px solid var(--highlight-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-family: var(--serif);
+  font-size: 0.88rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+/* Progress summary */
+.progress-summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 0;
+  font-size: 0.78rem;
+  color: var(--text2);
+  font-family: var(--mono);
+  animation: fadeUp 0.6s ease 0.1s both;
+}
+.progress-summary .count {
+  color: var(--accent);
+  font-weight: 500;
+}
+.progress-summary .bar-track {
+  flex: 1;
+  height: 4px;
+  background: var(--bg2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-summary .bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  width: var(--progress);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+}
+
+/* Cards */
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 12px;
+  padding-top: 16px;
+  font-weight: 500;
+}
+
+/* Schedule */
+.schedule-item {
+  display: flex;
+  align-items: baseline;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--bg2);
+  font-size: 0.85rem;
+  gap: 10px;
+}
+.schedule-item:last-child { border-bottom: none; }
+.schedule-item .time {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text3);
+  min-width: 72px;
+  flex-shrink: 0;
+}
+.schedule-item .event { flex: 1; }
+.schedule-item.open-block {
+  background: var(--green-light);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  margin: 4px -4px;
+  border-bottom: none;
+}
+.schedule-item.open-block .time { color: var(--green); font-weight: 500; }
+.schedule-item.open-block .event { color: var(--green); font-weight: 600; }
+.schedule-item.important .event { font-weight: 600; }
+.schedule-note {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--text2);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--bg2);
+}
+
+/* Task items */
+.task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bg2);
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: opacity 0.3s ease;
+}
+.task-item:last-child { border-bottom: none; }
+.task-item.checked { opacity: 0.5; }
+.task-item.checked .task-title { text-decoration: line-through; }
+
+.checkbox-outer {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border: 2px solid var(--card-border);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+  transition: all 0.25s ease;
+}
+.task-item.checked .checkbox-outer {
+  background: var(--green);
+  border-color: var(--green);
+}
+.checkbox-outer svg {
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  stroke: white;
+  stroke-width: 3;
+  fill: none;
+}
+.task-item.checked .checkbox-outer svg { opacity: 1; }
+
+.task-content { flex: 1; min-width: 0; }
+.task-title {
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.4;
+  transition: text-decoration 0.3s ease;
+}
+.task-meta {
+  font-size: 0.76rem;
+  color: var(--text2);
+  margin-top: 2px;
+  line-height: 1.45;
+}
+.task-time {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text3);
+  background: var(--bg2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  margin-left: auto;
+  align-self: flex-start;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* Primary wins */
+.win-item {
+  padding: 14px 0;
+}
+.win-item .task-title { font-size: 0.92rem; }
+.win-item .win-number {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.done-note {
+  font-size: 0.78rem;
+  color: var(--green);
+  font-family: var(--mono);
+  padding: 8px 0 0;
+  border-top: 1px solid var(--bg2);
+  margin-top: 4px;
+}
+
+/* Priority badges */
+.priority-badge {
+  font-size: 0.82rem;
+  margin-right: 4px;
+}
+
+/* Chase table */
+.chase-item {
+  display: flex;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--bg2);
+  font-size: 0.82rem;
+  gap: 8px;
+}
+.chase-item:last-child { border-bottom: none; }
+.chase-name {
+  font-weight: 600;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+.chase-what {
+  flex: 1;
+  color: var(--text2);
+  font-size: 0.78rem;
+}
+.chase-days {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.chase-days.stale {
+  background: var(--accent-light);
+  color: var(--accent);
+  font-weight: 500;
+}
+.chase-days.fresh {
+  background: var(--bg2);
+  color: var(--text3);
+}
+
+/* Collapsible */
+.collapsible-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 2px;
+  transition: border-radius 0.2s ease;
+}
+.collapsible-header.open {
+  border-radius: var(--radius) var(--radius) 0 0;
+  border-bottom-color: transparent;
+}
+.collapsible-header h3 {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.collapsible-header .arrow {
+  width: 18px;
+  height: 18px;
+  color: var(--text3);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+.collapsible-header.open .arrow { transform: rotate(180deg); }
+.collapsible-header .badge {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text3);
+  background: var(--bg2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.collapsible-body {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.collapsible-body.open { max-height: 5000px; }
+.collapsible-body .inner {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 4px 16px 16px;
+  box-shadow: var(--shadow);
+}
+
+/* Project groups */
+.project-group {
+  margin-bottom: 16px;
+}
+.project-group:last-child { margin-bottom: 0; }
+.project-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 2px;
+  line-height: 1.4;
+}
+.project-status {
+  font-size: 0.76rem;
+  color: var(--text2);
+  margin-bottom: 8px;
+  font-style: italic;
+}
+.project-group .task-item { padding: 6px 0; }
+.project-group .task-title { font-size: 0.82rem; font-weight: 400; }
+.minor-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin: 20px 0 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--bg2);
+}
+
+/* Calendar */
+.cal-week {
+  margin-bottom: 14px;
+}
+.cal-week-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.cal-day {
+  display: flex;
+  gap: 10px;
+  padding: 5px 0;
+  font-size: 0.82rem;
+  align-items: baseline;
+}
+.cal-date {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text3);
+  min-width: 56px;
+  flex-shrink: 0;
+}
+.cal-event { color: var(--text2); }
+.cal-day.today {
+  background: var(--accent-light);
+  margin: 2px -8px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+}
+.cal-day.today .cal-date { color: var(--accent); font-weight: 500; }
+.cal-day.today .cal-event { color: var(--text); font-weight: 500; }
+
+/* Counsel card */
+.counsel-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-left: 3px solid var(--accent);
+}
+.counsel-card .inner {
+  border-left: none;
+}
+.counsel-text {
+  font-family: var(--serif);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+.counsel-text p { margin-bottom: 12px; }
+.counsel-text p:last-child { margin-bottom: 0; }
+.counsel-subhead {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 18px 0 8px;
+  font-weight: 500;
+}
+
+/* Prose sections */
+.prose {
+  font-family: var(--serif);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+.prose p { margin-bottom: 10px; }
+.prose p:last-child { margin-bottom: 0; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text3);
+  padding: 24px 0 16px;
+  letter-spacing: 0.03em;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate { animation: fadeUp 0.5s ease both; }
+.animate-d1 { animation-delay: 0.05s; }
+.animate-d2 { animation-delay: 0.1s; }
+.animate-d3 { animation-delay: 0.15s; }
+.animate-d4 { animation-delay: 0.2s; }
+.animate-d5 { animation-delay: 0.25s; }
+.animate-d6 { animation-delay: 0.3s; }
+.animate-d7 { animation-delay: 0.35s; }
+.animate-d8 { animation-delay: 0.4s; }
+
+/* Touch states */
+@media (hover: hover) {
+  .task-item:hover { background: var(--bg2); margin: 0 -6px; padding-left: 6px; padding-right: 6px; border-radius: var(--radius-sm); }
+  .collapsible-header:hover { background: var(--bg2); }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="fill"></div></div>
+
+<div class="container">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="day-label">Daily Brief</div>
+    <h1>Tuesday, Feb 17</h1>
+    <div class="context">Mid-Winter Break &middot; Boys Week &middot; Covering for EO / Judy / CZ</div>
+    <div class="win-condition">If you ship the Lunar New Year gifts, start the engagement survey summary, and cover RCLM well, Tuesday was a win.</div>
+  </header>
+
+  <!-- Progress -->
+  <div class="progress-summary animate animate-d1">
+    <span class="count" id="progressText">0 / 11</span>
+    <div class="bar-track"><div class="bar-fill"></div></div>
+  </div>
+
+  <!-- Schedule -->
+  <div class="section-label animate animate-d2">Schedule</div>
+  <div class="card animate animate-d2">
+    <div class="schedule-item important">
+      <span class="time">8:00</span>
+      <span class="event">COLM (cover for Judy)</span>
+    </div>
+    <div class="schedule-item">
+      <span class="time">8:30</span>
+      <span class="event">Morning huddles</span>
+    </div>
+    <div class="schedule-item">
+      <span class="time">9:00</span>
+      <span class="event">Ops/Hwang Weekly</span>
+    </div>
+    <div class="schedule-item">
+      <span class="time">9:30</span>
+      <span class="event">OPERATIONS Tactical &amp; Strategic</span>
+    </div>
+    <div class="schedule-item">
+      <span class="time">10:30</span>
+      <span class="event" style="color:var(--text3)">Rad Scheduling Optimization (HOLD)</span>
+    </div>
+    <div class="schedule-item open-block">
+      <span class="time">11:00-3:00</span>
+      <span class="event">OPEN BLOCK</span>
+    </div>
+    <div class="schedule-item important">
+      <span class="time">3:00</span>
+      <span class="event">RCLM (cover for Judy)</span>
+    </div>
+    <div class="schedule-item">
+      <span class="time">4:00</span>
+      <span class="event">SHC Vaden Activation</span>
+    </div>
+    <div class="schedule-note">The 11-3 block is your window. Gifts, engagement survey, real work. Don't fragment it.</div>
+  </div>
+
+  <!-- Three Wins -->
+  <div class="section-label animate animate-d3">Three Wins</div>
+  <div class="card animate animate-d3" id="winsCard">
+    <div class="task-item win-item" data-key="win-1" onclick="toggleTask(this)">
+      <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+      <div class="task-content">
+        <div class="win-number">01</div>
+        <div class="task-title">Ship Lunar New Year gifts to managers</div>
+        <div class="task-meta">Cookie boxes in the car. Digital print at work. Ship > perfect.</div>
+      </div>
+      <div class="task-time">45m</div>
+    </div>
+    <div class="task-item win-item" data-key="win-2" onclick="toggleTask(this)">
+      <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+      <div class="task-content">
+        <div class="win-number">02</div>
+        <div class="task-title">Cover RCLM at 3pm competently</div>
+        <div class="task-meta">PET approved, dashboard live, Hugo plan out, A3 v3 Wed. Strong story.</div>
+      </div>
+      <div class="task-time">1h</div>
+    </div>
+    <div class="task-item win-item" data-key="win-3" onclick="toggleTask(this)">
+      <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+      <div class="task-content">
+        <div class="win-number">03</div>
+        <div class="task-title">Start engagement survey summary</div>
+        <div class="task-meta">~65 Smartsheet responses. Teddy on paternity. Identify themes.</div>
+      </div>
+      <div class="task-time">60-90m</div>
+    </div>
+    <div class="done-note">Already done: Amy email for FY25 data (sent today)</div>
+  </div>
+
+  <!-- Full Board -->
+  <div class="section-label animate animate-d4">Full Board</div>
+  <div class="card animate animate-d4">
+    <div class="task-item" data-key="board-1" onclick="toggleTask(this)">
+      <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+      <div class="task-content">
+        <div class="task-title"><span class="priority-badge">🎯</span>Check Beeline / Workday / ServiceNow</div>
+        <div class="task-meta">Pending approvals. Covering for leaders.</div>
+      </div>
+      <div class="task-time">15m</div>
+    </div>
+    <div class="task-item" data-key="board-2" onclick="toggleTask(this)">
+      <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+      <div class="task-content">
+        <div class="task-title"><span class="priority-badge">🎯</span>Follow up with Adeleh on HCAI meeting</div>
+        <div class="task-meta">Critical path for PET Uptake Room. One email.</div>
+      </div>
+      <div class="task-time">10m</div>
+    </div>
+    <div class="task-item" data-key="board-3" onclick="toggleTask(this)">
+      <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+      <div class="task-content">
+        <div class="task-title"><span class="priority-badge">🎯</span>Review Dyad Modality Presentation template</div>
+        <div class="task-meta">Could be distribution channel for your scorecard work.</div>
+      </div>
+      <div class="task-time">20m</div>
+    </div>
+    <div class="task-item" data-key="board-4" onclick="toggleTask(this)">
+      <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+      <div class="task-content">
+        <div class="task-title"><span class="priority-badge">💡</span>Look up Trumpaccounts.gov</div>
+        <div class="task-meta">Free money for kids. Quick research.</div>
+      </div>
+      <div class="task-time">10m</div>
+    </div>
+    <div class="task-item" data-key="board-5" onclick="toggleTask(this)">
+      <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+      <div class="task-content">
+        <div class="task-title"><span class="priority-badge">💡</span>Talk to Tina about Lu's protocol burden</div>
+        <div class="task-meta">400 protocols, 2-3 min each, doing them at home.</div>
+      </div>
+      <div class="task-time">20m</div>
+    </div>
+    <div class="task-item" data-key="board-6" onclick="toggleTask(this)">
+      <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+      <div class="task-content">
+        <div class="task-title">Text Judy</div>
+        <div class="task-meta">35 days since last touch. "How's recovery?"</div>
+      </div>
+      <div class="task-time">5m</div>
+    </div>
+    <div class="task-item" data-key="board-7" onclick="toggleTask(this)">
+      <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+      <div class="task-content">
+        <div class="task-title">Confirm parents' Saturday arrival</div>
+        <div class="task-meta">Text Mom and Dad. What time? Dinner plans?</div>
+      </div>
+      <div class="task-time">5m</div>
+    </div>
+    <div class="task-item" data-key="board-8" onclick="toggleTask(this)">
+      <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+      <div class="task-content">
+        <div class="task-title">Evening with boys</div>
+        <div class="task-meta">SM made 9 dishes last night. The feast energy is alive. Be in it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chase These People -->
+  <div class="section-label animate animate-d5">Chase These People</div>
+  <div class="card animate animate-d5">
+    <div class="chase-item">
+      <span class="chase-name">Kevin/Grant</span>
+      <span class="chase-what">Hugo onboarding plan response</span>
+      <span class="chase-days fresh">1d</span>
+    </div>
+    <div class="chase-item">
+      <span class="chase-name">Farshad</span>
+      <span class="chase-what">A3 v1 feedback. v3 goes to group Wed.</span>
+      <span class="chase-days fresh">4d</span>
+    </div>
+    <div class="chase-item">
+      <span class="chase-name">Amy</span>
+      <span class="chase-what">FY25 Same Day data</span>
+      <span class="chase-days fresh">1d</span>
+    </div>
+    <div class="chase-item">
+      <span class="chase-name">Adeleh</span>
+      <span class="chase-what">HCAI meeting (PET critical path)</span>
+      <span class="chase-days stale">11d</span>
+    </div>
+    <div class="chase-item">
+      <span class="chase-name">Cat Lee</span>
+      <span class="chase-what">Peds Xray scope sign-off (on PTO)</span>
+      <span class="chase-days stale">8d</span>
+    </div>
+    <div class="chase-item">
+      <span class="chase-name">Kris</span>
+      <span class="chase-what">Hudson-Lake Q&amp;A scheduling</span>
+      <span class="chase-days stale">10d</span>
+    </div>
+  </div>
+
+  <!-- Calendar -->
+  <div class="section-label animate animate-d6">Calendar</div>
+  <div class="card animate animate-d6">
+    <div class="cal-week">
+      <div class="cal-week-label">This Week &middot; Boys &middot; Break</div>
+      <div class="cal-day"><span class="cal-date">Mon 2/16</span><span class="cal-event">Dashboard deployed, Hugo shipped</span></div>
+      <div class="cal-day today"><span class="cal-date">Tue 2/17</span><span class="cal-event">TODAY &mdash; Lunar New Year gifts</span></div>
+      <div class="cal-day"><span class="cal-date">Wed 2/18</span><span class="cal-event">Ship A3 v3 to physicians</span></div>
+      <div class="cal-day"><span class="cal-date">Thu 2/19</span><span class="cal-event">NM Division 7:30am(!)</span></div>
+      <div class="cal-day"><span class="cal-date">Fri 2/20</span><span class="cal-event">1:1 Grant (Hugo onboarding)</span></div>
+      <div class="cal-day"><span class="cal-date">Sat 2/21</span><span class="cal-event">Mom &amp; Dad visiting</span></div>
+      <div class="cal-day"><span class="cal-date">Sun 2/22</span><span class="cal-event">Boys to Grace</span></div>
+    </div>
+    <div class="cal-week">
+      <div class="cal-week-label">Next Week &middot; Grace's Week</div>
+      <div class="cal-day"><span class="cal-date">Tue 2/24</span><span class="cal-event">Teddy returns from paternity</span></div>
+      <div class="cal-day"><span class="cal-date">Thu 2/26</span><span class="cal-event">Charlie Ralston Showcase</span></div>
+      <div class="cal-day"><span class="cal-date">Sat 2/28</span><span class="cal-event">Marcello turns 4!</span></div>
+    </div>
+  </div>
+
+  <!-- Week Arc (collapsible) -->
+  <div class="animate animate-d7" style="margin-bottom:12px">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">
+      <h3>What Happened This Week</h3>
+      <svg class="arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="5 8 10 13 15 8"/></svg>
+    </div>
+    <div class="collapsible-body">
+      <div class="inner">
+        <div class="prose">
+          <p><strong>Monday</strong> was a powerhouse. You came in asking yourself a good question: "What can I take the lead on instead of just covering?" And then you answered it. Deployed the Same Day dashboard to GitHub Pages. Shipped Hugo's onboarding plan. Created A3 v3. Chatted with Roberto. Helped Dylan. Came home to SM's Lunar New Year feast: 9 hand-cooked Taiwanese dishes. Made the call on the stamp: digital print is fine, shipping matters more than perfection.</p>
+          <p>Six straight days of flow: operational shipping + emotional depth + creative presence. Today has a 4-hour open window. That's space to move projects, not just survive meetings.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects (collapsible) -->
+  <div class="animate animate-d7" style="margin-bottom:12px">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">
+      <h3>Projects</h3>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span class="badge" id="projectProgress">0 / 27</span>
+        <svg class="arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="5 8 10 13 15 8"/></svg>
+      </div>
+    </div>
+    <div class="collapsible-body">
+      <div class="inner">
+        <div class="project-group">
+          <div class="project-name">🔦 NM Inpatient PET</div>
+          <div class="project-status">Moving fast. You're proud of this one.</div>
+          <div class="task-item" data-key="proj-1" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Ship A3 v3 to physician group Wed</div></div>
+          </div>
+          <div class="task-item" data-key="proj-2" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Pull inpatient PET data for Erin</div></div>
+          </div>
+          <div class="task-item" data-key="proj-3" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Design outpatient expedite pathway with Tina</div></div>
+          </div>
+          <div class="task-item" data-key="proj-4" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Connect with Gloria on Epic order timeline</div></div>
+          </div>
+        </div>
+
+        <div class="project-group">
+          <div class="project-name">🔦 Same-Day Urgent Imaging</div>
+          <div class="project-status">Dashboard deployed. Momentum is real.</div>
+          <div class="task-item" data-key="proj-5" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">FY25 data requested from Amy (sent today)</div></div>
+          </div>
+          <div class="task-item" data-key="proj-6" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Share FY25 vs FY26 comparison when data arrives</div></div>
+          </div>
+          <div class="task-item" data-key="proj-7" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Elizabeth sending workflows to Chona's group</div></div>
+          </div>
+        </div>
+
+        <div class="project-group">
+          <div class="project-name">🔦 PET Uptake Room Conversion</div>
+          <div class="project-status">Decision won. Now build it.</div>
+          <div class="task-item" data-key="proj-8" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Follow up with Adeleh on HCAI meeting (11 days!)</div></div>
+          </div>
+          <div class="task-item" data-key="proj-9" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Follow up with Erin on non-FDG workflow</div></div>
+          </div>
+          <div class="task-item" data-key="proj-10" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Engage PDC on space design once HCAI resolves</div></div>
+          </div>
+          <div class="task-item" data-key="proj-11" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Clarify budget vs existing FY26 capital approval</div></div>
+          </div>
+        </div>
+
+        <div class="project-group">
+          <div class="project-name">🔥 NM Unionization</div>
+          <div class="project-status">Steady. Don't let it drift.</div>
+          <div class="task-item" data-key="proj-12" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Hudson Training Wed 3pm</div></div>
+          </div>
+          <div class="task-item" data-key="proj-13" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Ask Shareef about meeting format + staff comm guide</div></div>
+          </div>
+          <div class="task-item" data-key="proj-14" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Follow up with Kris on Q&A scheduling (10 days)</div></div>
+          </div>
+          <div class="task-item" data-key="proj-15" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Continue rounding, review SHC benefits talking points</div></div>
+          </div>
+        </div>
+
+        <div class="project-group">
+          <div class="project-name">🔦 Employee Engagement</div>
+          <div class="project-status">~65 responses waiting.</div>
+          <div class="task-item" data-key="proj-16" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Compile Smartsheet into Development Resource Guide</div></div>
+          </div>
+          <div class="task-item" data-key="proj-17" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Confirm Scott signed NC-to-CM by 2/15</div></div>
+          </div>
+          <div class="task-item" data-key="proj-18" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Schedule end-of-Feb pulse check with Erin/Ben</div></div>
+          </div>
+          <div class="task-item" data-key="proj-19" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Coach bottom-quartile managers when guide ready</div></div>
+          </div>
+        </div>
+
+        <div class="minor-label">Minor Projects</div>
+
+        <div class="project-group">
+          <div class="project-name">🔦 Modality Operations Guide</div>
+          <div class="task-item" data-key="proj-20" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Review scorecard template (15-20 min)</div></div>
+          </div>
+          <div class="task-item" data-key="proj-21" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Pitch Ultrasound pilot to Krystal (Wed 1:1)</div></div>
+          </div>
+        </div>
+
+        <div class="project-group">
+          <div class="project-name">🔦 Overnight Supervisor Hiring</div>
+          <div class="task-item" data-key="proj-22" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Check Kevin/Grant response to onboarding plan</div></div>
+          </div>
+          <div class="task-item" data-key="proj-23" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Grant 1:1 Friday to review plan</div></div>
+          </div>
+        </div>
+
+        <div class="project-group">
+          <div class="project-name">📌 Finance Dashboard</div>
+          <div class="task-item" data-key="proj-24" onclick="toggleTask(this)">
+            <div class="checkbox-outer"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+            <div class="task-content"><div class="task-title">Update with PP08 data, deploy via GitHub Pages</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How to Show Up (collapsible) -->
+  <div class="animate animate-d8" style="margin-bottom:12px">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">
+      <h3>How to Show Up Today</h3>
+      <svg class="arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="5 8 10 13 15 8"/></svg>
+    </div>
+    <div class="collapsible-body">
+      <div class="inner">
+        <div class="prose">
+          <p>Yesterday was a big day. You shipped hard, processed deeply, and went to bed well-positioned. The morning is meetings, but manageable, and you have real updates to share. Come to RCLM at 3 with confidence, not just competence.</p>
+          <p>The 4-hour window from 11am to 3pm is a gift on a Tuesday. Lunar New Year gifts, the engagement survey, real work. You have space to move today, not just survive. When work ends, the boys are home. The phone goes down.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Claude's Counsel (collapsible) -->
+  <div class="animate animate-d8" style="margin-bottom:12px">
+    <div class="collapsible-header counsel-card" onclick="toggleCollapse(this)">
+      <h3>Claude's Counsel</h3>
+      <svg class="arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="5 8 10 13 15 8"/></svg>
+    </div>
+    <div class="collapsible-body">
+      <div class="inner counsel-card" style="border-top:none;border-radius:0 0 var(--radius) var(--radius);">
+        <div class="counsel-text">
+          <p>Something caught my attention yesterday.</p>
+          <p>Tom brought up the Dyad Presentation template from Umar. You noticed immediately it was thin, missing what matters. But here's what I find interesting: you already built the answer. The Modality Operations Guide IS the framework for telling a modality story well. The dyad template is Umar asking for something you've already been building from a different angle.</p>
+          <p>This could be a convergence moment. If you position the Modality Ops Guide as the backbone for these dyad presentations, it goes from "a framework Paulo built" to "the standard operating tool for manager-director interactions." That's institutional leverage. Your tool becomes the system, and then everyone uses it, and then it's just how things work.</p>
+          <p>Not for today. But plant the seed.</p>
+
+          <div class="counsel-subhead">What I'm Curious About</div>
+
+          <p>You decided the digital print is fine. The stamp can wait. "The important thing here is the shipping. I have often let perfect be the enemy of good, actually the enemy of doing anything at all."</p>
+          <p>That sentence is the whole pattern in miniature. The old Paulo would have either stayed up late forcing the stamp and been exhausted, or let perfect kill the whole project and shipped nothing. This Paulo put the cookies in the car, made peace with good enough, and will deliver something thoughtful to his managers tomorrow. That's growth. Not in the grand philosophical sense. In the Tuesday morning, cookies-in-the-car sense.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">Generated: 2026-02-16 3:25 PM PST &middot; Chief of Staff</div>
+
+</div>
+
+<script>
+var STORAGE_KEY = 'daily-brief-2026-02-17';
+
+function getState() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+  } catch(e) { return {}; }
+}
+
+function saveState(state) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function toggleTask(el) {
+  var key = el.getAttribute('data-key');
+  if (!key) return;
+  var state = getState();
+  state[key] = !state[key];
+  saveState(state);
+  el.classList.toggle('checked', state[key]);
+  updateProgress();
+}
+
+function toggleCollapse(header) {
+  header.classList.toggle('open');
+  var body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+function updateProgress() {
+  var state = getState();
+  var allTasks = document.querySelectorAll('.task-item[data-key]');
+  var total = 0;
+  var done = 0;
+  allTasks.forEach(function(el) {
+    var key = el.getAttribute('data-key');
+    if (key && !key.startsWith('proj-')) {
+      total++;
+      if (state[key]) done++;
+    }
+  });
+  var pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  document.documentElement.style.setProperty('--progress', pct + '%');
+  var txt = document.getElementById('progressText');
+  if (txt) txt.textContent = done + ' / ' + total;
+
+  // Project progress
+  var projTotal = 0, projDone = 0;
+  allTasks.forEach(function(el) {
+    var key = el.getAttribute('data-key');
+    if (key && key.startsWith('proj-')) {
+      projTotal++;
+      if (state[key]) projDone++;
+    }
+  });
+  var projTxt = document.getElementById('projectProgress');
+  if (projTxt) projTxt.textContent = projDone + ' / ' + projTotal;
+}
+
+// Restore state on load
+(function init() {
+  var state = getState();
+  document.querySelectorAll('.task-item[data-key]').forEach(function(el) {
+    var key = el.getAttribute('data-key');
+    if (key && state[key]) {
+      el.classList.add('checked');
+    }
+  });
+  updateProgress();
+})();
+</script>
+
+</body>
+</html>
